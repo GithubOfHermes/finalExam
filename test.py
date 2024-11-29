@@ -44,5 +44,5 @@ def main():
         else:
             st.warning("'지도' 또는 '맛집'을 붙여서 입력해 주세요 (예: '서울 지도', '춘천 닭갈비 맛집').")
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
