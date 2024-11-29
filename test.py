@@ -19,6 +19,9 @@ def generate_map_iframe_html(query, width, height):
 
 # Streamlit 앱 구현
 def main():
+    # 화면 너비 제한 해제 설정
+    st.set_page_config(layout="wide")
+
     st.title("여행 가이드 챗봇")
     st.write("검색하고자 하는 장소를 입력하세요.")
 
@@ -28,11 +31,16 @@ def main():
         if " 지도" in user_input:
             query = user_input.replace(" 지도", "")
             map_html = generate_map_iframe_html(query, 800, 500)
-            st.components.v1.html(map_html, height=400)
+            st.components.v1.html(map_html, height=500)
         elif " 맛집" in user_input:
             query = user_input.replace(" 맛집", "")
-            map_html = generate_map_iframe_html(query, 380, 650)
-            st.components.v1.html(map_html, height=650)
+            col1, col2 = st.columns([2, 1])
+            with col1:
+                map_html_1 = generate_map_iframe_html(query, 800, 500)
+                st.components.v1.html(map_html_1, height=500)
+            with col2:
+                map_html_2 = generate_map_iframe_html(query, 380, 500)
+                st.components.v1.html(map_html_2, height=500)
         else:
             st.warning("'지도' 또는 '맛집'을 붙여서 입력해 주세요 (예: '서울 지도', '춘천 닭갈비 맛집').")
 
